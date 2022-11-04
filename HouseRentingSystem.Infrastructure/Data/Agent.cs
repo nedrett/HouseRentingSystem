@@ -1,0 +1,24 @@
+﻿namespace HouseRentingSystem.Infrastructure.Data
+{
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
+    using Microsoft.AspNetCore.Identity;
+    using static Data.DataConstants.Agent;
+
+
+    public class Agent
+    {
+        [Key]
+        public int Id { get; set; }
+
+        [Required]
+        [StringLength(PhoneNumberMaxLength)]
+        public string PhoneNumber { get; set; } = null!;
+
+        [Required]
+        public string UserId { get; set; } = null!;
+
+        [ForeignKey(nameof(UserId))] 
+        public IdentityUser User { get; set; } = null!;
+    }
+}

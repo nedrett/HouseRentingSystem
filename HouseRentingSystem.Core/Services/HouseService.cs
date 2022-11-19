@@ -126,5 +126,40 @@
                 .Distinct()
                 .ToListAsync();
         }
+
+        public async Task<IEnumerable<HouseServiceModel>> AllHousesByAgentId(int agentId)
+        {
+            var houses = await repo.AllReadonly<House>()
+                .Where(h => h.AgentId == agentId)
+                .ToListAsync();
+
+            return ProjectToModel(houses);
+        }
+
+        public async Task<IEnumerable<HouseServiceModel>> AllHousesByUserId(string userId)
+        {
+            var houses = await repo.AllReadonly<House>()
+                .Where(h => h.RenterId == userId)
+                .ToListAsync();
+
+            return ProjectToModel(houses);
+        }
+
+        private List<HouseServiceModel> ProjectToModel(List<House> houses)
+        {
+            var result = houses
+                .Select(h => new HouseServiceModel()
+                {
+                    Id = h.Id,
+                    Title = h.Title,
+                    Address = h.Address,
+                    ImageUrl = h.ImageUrl,
+                    PricePerMonth = h.PricePerMonth,
+                    IsRented = h.RenterId != null
+                })
+                .ToList();
+
+            return result;
+        }
     }
 }

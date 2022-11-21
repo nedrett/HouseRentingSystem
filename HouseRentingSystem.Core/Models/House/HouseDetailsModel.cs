@@ -1,12 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace HouseRentingSystem.Core.Models.House
+﻿namespace HouseRentingSystem.Core.Models.House
 {
-    public class HouseDetailsModel
+    using Agent;
+
+    public class HouseDetailsModel : HouseServiceModel
     {
+        public string Description { get; init; } = null!;
+
+        public string Category { get; init; } = null!;
+
+        public AgentServiceModel Agent { get; init; }
     }
 }

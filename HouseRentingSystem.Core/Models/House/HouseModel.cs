@@ -5,6 +5,8 @@
 
     public class HouseModel
     {
+        public int Id { get; set; }
+
         [Required]
         [StringLength(TitleMaxLength, MinimumLength = TitleMinLength)]
         public string Title { get; set; } = null!;
